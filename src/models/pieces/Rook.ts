@@ -1,6 +1,6 @@
-import { PIECES } from "../constants";
+import { PIECES } from "../../constants";
 import { Piece } from "./Piece";
-import { Coordinate, PieceColor, PieceDisplay } from "../types";
+import { Coordinate, PieceColor, PieceDisplay } from "../../types";
 
 export class Rook extends Piece {
   constructor(color: PieceColor) {

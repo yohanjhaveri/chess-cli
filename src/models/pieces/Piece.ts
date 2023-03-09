@@ -1,4 +1,4 @@
-import { Coordinate, PieceColor, PieceDisplay, PiecePoints } from "../types";
+import { Coordinate, PieceColor, PieceDisplay, PiecePoints } from "../../types";
 
 export abstract class Piece {
   public readonly color: PieceColor;
@@ -19,7 +19,7 @@ export abstract class Piece {
 
   abstract getAllMoves(position: Coordinate): Coordinate[];
   abstract getAllAttacks(position: Coordinate): Coordinate[];
-  
+
   private filterValidSquares(squares: Coordinate[]) {
     return squares.filter(([x, y]) => {
       if (x < 0 || x > 7) return false;
@@ -31,7 +31,7 @@ export abstract class Piece {
 
   private getValidMoves() {
     const moves = this.getAllMoves(this.position);
-    return this.filterValidSquares(moves)
+    return this.filterValidSquares(moves);
   }
 
   private getValidAttacks() {

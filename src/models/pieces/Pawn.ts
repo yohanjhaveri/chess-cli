@@ -1,13 +1,13 @@
-import { PIECES } from '../constants';
+import { PIECES } from "../../constants";
 import { Piece } from "./Piece";
-import { Coordinate, PieceColor, PieceDisplay } from './../types';
+import { Coordinate, PieceColor, PieceDisplay } from "../../types";
 
 export class Pawn extends Piece {
   constructor(color: PieceColor) {
     const display = {
       W: PIECES.WP,
-      B: PIECES.BP
-    }[color] as PieceDisplay
+      B: PIECES.BP,
+    }[color] as PieceDisplay;
 
     super(color, 1, display);
   }
