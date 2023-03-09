@@ -7,6 +7,10 @@ import { Queen } from "./pieces/Queen";
 import { King } from "./pieces/King";
 
 import { PieceColor } from "../types";
+import { ROWS, COLS } from "../constants";
+
+import { generateIterator } from "../utils";
+import chalk from "chalk";
 
 type Square = Piece | null;
 
@@ -35,8 +39,6 @@ export class Board {
       emptyRow,
       emptyRow,
       emptyRow,
-      emptyRow,
-      emptyRow,
       blackRowPawn,
       blackRowMain,
     ];
@@ -53,5 +55,51 @@ export class Board {
       new Knight(color),
       new Rook(color),
     ];
+  }
+
+  public printBoard(color: PieceColor) {
+    if (color === "W") {
+      this.printWhite();
+    } else if (color === "B") {
+      this.printBlack();
+    }
+  }
+
+  private printWhite() {
+    for (let xIndex = 7; xIndex >= 0; xIndex--) {
+      let row = ROWS[xIndex] + " ";
+
+      for (let yIndex = 0; yIndex < 8; yIndex++) {
+        row += this.printSquare(this.board[xIndex][yIndex]);
+      }
+
+      console.log(row);
+    }
+
+    console.log("  " + COLS.join(" "));
+  }
+
+  private printBlack() {
+    for (let xIndex = 0; xIndex < 8; xIndex++) {
+      let row = ROWS[xIndex] + " ";
+
+      for (let yIndex = 7; yIndex >= 0; yIndex--) {
+        row += this.printSquare(this.board[xIndex][yIndex]);
+      }
+
+      console.log(row);
+    }
+
+    console.log("  " + COLS.reverse().join(" "));
+  }
+
+  private printSquare(square: Square) {
+    if (square === null) {
+      return "⋅ ";
+    } else if (square.color === "W") {
+      return chalk.white(square.display + " ");
+    } else if (square.color === "B") {
+      return chalk.red(square.display + " ");
+    }
   }
 }

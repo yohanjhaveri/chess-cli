@@ -3,7 +3,7 @@ import { Coordinate, PieceColor, PieceDisplay, PiecePoints } from "../../types";
 export abstract class Piece {
   public readonly color: PieceColor;
   public readonly points: PiecePoints;
-  public readonly display: string;
+  public readonly display: PieceDisplay;
 
   public alive: boolean;
   public position: Coordinate;
