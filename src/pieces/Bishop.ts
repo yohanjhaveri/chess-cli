@@ -1,4 +1,4 @@
-import { PIECES } from '../constants';
+import { PIECES } from "../constants";
 import { Piece } from "./Piece";
 import { Coordinate, PieceColor, PieceDisplay } from "../types";
 
@@ -6,8 +6,8 @@ export class Bishop extends Piece {
   constructor(color: PieceColor) {
     const display = {
       W: PIECES.WB,
-      B: PIECES.BB
-    }[color] as PieceDisplay
+      B: PIECES.BB,
+    }[color] as PieceDisplay;
 
     super(color, 3, display);
   }
