@@ -16,11 +16,9 @@ export abstract class Piece {
 
   abstract getAllMoves(position: Coordinate): Coordinate[];
   abstract getAllAttacks(position: Coordinate): Coordinate[];
-
-  private getValidMoves() {
-    const moves = this.getAllMoves(this.position);
-
-    return moves.filter((m) => {
+  
+  private filterValidSquares(squares) {
+    return squares.filter((m) => {
       if (m[0] < 0 || m[0] > 7) return false;
       if (m[1] < 0 || m[1] > 7) return false;
 
@@ -28,15 +26,14 @@ export abstract class Piece {
     });
   }
 
+  private getValidMoves() {
+    const moves = this.getAllMoves(this.position);
+    return this.filterValidSquares(moves)
+  }
+
   private getValidAttacks() {
     const attackingSquares = this.getAllAttacks(this.position);
-
-    return attackingSquares.filter((m) => {
-      if (m[0] < 0 || m[0] > 7) return false;
-      if (m[1] < 0 || m[1] > 7) return false;
-
-      return true;
-    });
+    return this.filterValidSquares(attackingSquares);
   }
 
   public move(position: Coordinate) {
