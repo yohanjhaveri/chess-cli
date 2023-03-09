@@ -1,15 +1,15 @@
-import { PIECES } from "../constants";
+import { PIECES } from "../../constants";
 import { Piece } from "./Piece";
-import { Coordinate, PieceColor, PieceDisplay } from "../types";
+import { Coordinate, PieceColor, PieceDisplay } from "../../types";
 
-export class Knight extends Piece {
+export class King extends Piece {
   constructor(color: PieceColor) {
     const display = {
-      W: PIECES.WN,
-      B: PIECES.BN,
+      W: PIECES.WK,
+      B: PIECES.BK,
     }[color] as PieceDisplay;
 
-    super(color, 3, display);
+    super(color, -1, display);
   }
 
   getAllMoves(position: Coordinate): Coordinate[] {
@@ -22,14 +22,14 @@ export class Knight extends Piece {
 
   private generatePositions([x, y]: Coordinate): Coordinate[] {
     const offsets: Coordinate[] = [
-      [-2, -1], // far up, left
-      [2, -1], // far down, left
-      [-1, -2], // up, far left
-      [1, -2], // down, far left
-      [-2, 1], // far up, right
-      [2, 1], // far down, right
-      [-1, 2], // up, far right
-      [1, 2], // down, far right
+      [-1, -1], // up left
+      [1, -1], // down left
+      [-1, 1], // up right
+      [1, 1], // down right
+      [-1, 0], // up
+      [1, 0], // down
+      [0, -1], // left
+      [0, 1], // right
     ];
 
     return offsets.map(([dx, dy]) => [x + dx, y + dy]);

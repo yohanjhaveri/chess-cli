@@ -1,15 +1,15 @@
-import { PIECES } from "../constants";
+import { PIECES } from "../../constants";
 import { Piece } from "./Piece";
-import { Coordinate, PieceColor, PieceDisplay } from "../types";
+import { Coordinate, PieceColor, PieceDisplay } from "../../types";
 
-export class Queen extends Piece {
+export class Bishop extends Piece {
   constructor(color: PieceColor) {
     const display = {
-      W: PIECES.WQ,
-      B: PIECES.BQ,
+      W: PIECES.WB,
+      B: PIECES.BB,
     }[color] as PieceDisplay;
 
-    super(color, 9, display);
+    super(color, 3, display);
   }
 
   getAllMoves(position: Coordinate): Coordinate[] {
@@ -28,10 +28,6 @@ export class Queen extends Piece {
       moves.push([x + index, y - index]); // down left
       moves.push([x - index, y + index]); // up right
       moves.push([x + index, y + index]); // down right
-      moves.push([x - index, y]); // up
-      moves.push([x + index, y]); // down
-      moves.push([x, y - index]); // left
-      moves.push([x, y + index]); // right
     }
 
     return moves;
