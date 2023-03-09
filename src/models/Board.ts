@@ -1,3 +1,5 @@
+import chalk from "chalk";
+
 import { Knight } from "./pieces/Knight";
 import { Pawn } from "./pieces/Pawn";
 import { Piece } from "./pieces/Piece";
@@ -10,7 +12,6 @@ import { PieceColor } from "../types";
 import { ROWS, COLS } from "../constants";
 
 import { generateIterator } from "../utils";
-import chalk from "chalk";
 
 type Square = Piece | null;
 
@@ -66,11 +67,11 @@ export class Board {
   }
 
   private printWhite() {
-    for (let xIndex = 7; xIndex >= 0; xIndex--) {
-      let row = ROWS[xIndex] + " ";
+    for (let x = ROWS.length - 1; x >= 0; x--) {
+      let row = ROWS[x] + " ";
 
-      for (let yIndex = 0; yIndex < 8; yIndex++) {
-        row += this.printSquare(this.board[xIndex][yIndex]);
+      for (let y = 0; y < COLS.length; y++) {
+        row += this.printSquare(this.board[x][y]);
       }
 
       console.log(row);
@@ -80,11 +81,11 @@ export class Board {
   }
 
   private printBlack() {
-    for (let xIndex = 0; xIndex < 8; xIndex++) {
-      let row = ROWS[xIndex] + " ";
+    for (let x = 0; x < ROWS.length; x++) {
+      let row = ROWS[x] + " ";
 
-      for (let yIndex = 7; yIndex >= 0; yIndex--) {
-        row += this.printSquare(this.board[xIndex][yIndex]);
+      for (let y = COLS.length - 1; y >= 0; y--) {
+        row += this.printSquare(this.board[x][y]);
       }
 
       console.log(row);
@@ -103,3 +104,8 @@ export class Board {
     }
   }
 }
+
+const board = new Board();
+board.printBoard("W");
+console.log("------------------");
+board.printBoard("B");
