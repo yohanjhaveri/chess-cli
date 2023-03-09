@@ -15,5 +15,3 @@ export const PIECES = {
   BP: "♟︎",
   WP: "♙",
 };
-
-console.log(PIECES);
