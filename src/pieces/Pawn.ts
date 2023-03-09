@@ -1,19 +1,25 @@
+import { PIECES } from '../constants';
 import { Piece } from "./Piece";
-import { Coordinate } from "../types";
+import { Coordinate, PieceColor, PieceDisplay } from './../types';
 
 export class Pawn extends Piece {
-  constructor() {
-    super("p", 1);
+  constructor(color: PieceColor) {
+    const display = {
+      W: PIECES.WP,
+      B: PIECES.BP
+    }[color] as PieceDisplay
+
+    super(color, 1, display);
   }
 
-  getAllMoves([x, y]: Coordinate): Coordinate[] {
+  getAllMoves([x, y]: Coordinate) {
     return {
       W: [[x, y + 1]],
       B: [[x, y - 1]],
     }[this.color] as Coordinate[];
   }
 
-  getAllAttacks([x, y]: Coordinate): Coordinate[] {
+  getAllAttacks([x, y]: Coordinate) {
     return {
       W: [
         [x - 1, y + 1],

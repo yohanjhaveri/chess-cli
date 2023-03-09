@@ -1,26 +1,29 @@
-import { Coordinate, PieceColor, PiecePoint } from "../types";
+import { Coordinate, PieceColor, PieceDisplay, PiecePoints } from "../types";
 
 export abstract class Piece {
   public readonly color: PieceColor;
-  public readonly points: PiecePoint;
+  public readonly points: PiecePoints;
   public readonly display: string;
 
+  public alive: boolean;
   public position: Coordinate;
   public validMoves: Coordinate[];
   public validAttacks: Coordinate[];
 
-  constructor(display: string, points: PiecePoint) {
-    this.display = display;
+  constructor(color: PieceColor, points: PiecePoints, display: PieceDisplay) {
+    this.alive = true;
+    this.color = color;
     this.points = points;
+    this.display = display;
   }
 
   abstract getAllMoves(position: Coordinate): Coordinate[];
   abstract getAllAttacks(position: Coordinate): Coordinate[];
   
-  private filterValidSquares(squares) {
-    return squares.filter((m) => {
-      if (m[0] < 0 || m[0] > 7) return false;
-      if (m[1] < 0 || m[1] > 7) return false;
+  private filterValidSquares(squares: Coordinate[]) {
+    return squares.filter(([x, y]) => {
+      if (x < 0 || x > 7) return false;
+      if (y < 0 || y > 7) return false;
 
       return true;
     });
@@ -42,5 +45,7 @@ export abstract class Piece {
     this.validAttacks = this.getValidAttacks();
   }
 
-  public kill() {}
+  public kill() {
+    this.alive = false;
+  }
 }
