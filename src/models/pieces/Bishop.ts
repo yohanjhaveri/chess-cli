@@ -4,12 +4,7 @@ import { Coordinate, PieceColor, PieceDisplay } from "../../types";
 
 export class Bishop extends Piece {
   constructor(color: PieceColor) {
-    const display = {
-      W: PIECES.WB,
-      B: PIECES.BB,
-    }[color] as PieceDisplay;
-
-    super(color, 3, display);
+    super(color, 3, PIECES.B);
   }
 
   getAllMoves(position: Coordinate): Coordinate[] {

@@ -4,12 +4,7 @@ import { Coordinate, PieceColor, PieceDisplay } from "../../types";
 
 export class King extends Piece {
   constructor(color: PieceColor) {
-    const display = {
-      W: PIECES.WK,
-      B: PIECES.BK,
-    }[color] as PieceDisplay;
-
-    super(color, -1, display);
+    super(color, -1, PIECES.K);
   }
 
   getAllMoves(position: Coordinate): Coordinate[] {

@@ -1,3 +1,5 @@
+import chalk from "chalk";
+
 import { Knight } from "./pieces/Knight";
 import { Pawn } from "./pieces/Pawn";
 import { Piece } from "./pieces/Piece";
@@ -7,6 +9,9 @@ import { Queen } from "./pieces/Queen";
 import { King } from "./pieces/King";
 
 import { PieceColor } from "../types";
+import { ROWS, COLS } from "../constants";
+
+import { generateIterator } from "../utils";
 
 type Square = Piece | null;
 
@@ -35,8 +40,6 @@ export class Board {
       emptyRow,
       emptyRow,
       emptyRow,
-      emptyRow,
-      emptyRow,
       blackRowPawn,
       blackRowMain,
     ];
@@ -53,5 +56,51 @@ export class Board {
       new Knight(color),
       new Rook(color),
     ];
+  }
+
+  public printBoard(color: PieceColor) {
+    if (color === "W") {
+      this.printWhite();
+    } else if (color === "B") {
+      this.printBlack();
+    }
+  }
+
+  private printWhite() {
+    for (let x = ROWS.length - 1; x >= 0; x--) {
+      let row = ROWS[x] + " ";
+
+      for (let y = 0; y < COLS.length; y++) {
+        row += this.printSquare(this.board[x][y]);
+      }
+
+      console.log(row);
+    }
+
+    console.log("  " + COLS.join(" "));
+  }
+
+  private printBlack() {
+    for (let x = 0; x < ROWS.length; x++) {
+      let row = ROWS[x] + " ";
+
+      for (let y = COLS.length - 1; y >= 0; y--) {
+        row += this.printSquare(this.board[x][y]);
+      }
+
+      console.log(row);
+    }
+
+    console.log("  " + COLS.reverse().join(" "));
+  }
+
+  private printSquare(square: Square) {
+    if (square === null) {
+      return "⋅ ";
+    } else if (square.color === "W") {
+      return chalk.white(square.display + " ");
+    } else if (square.color === "B") {
+      return chalk.red(square.display + " ");
+    }
   }
 }
