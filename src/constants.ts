@@ -15,3 +15,12 @@ export const PIECES: Pieces = {
   K: "♚",
   P: "♟︎",
 };
+
+export const PIECE_NAMES = new Set([
+  "pawn",
+  "knight",
+  "bishop",
+  "rook",
+  "queen",
+  "king",
+]);
