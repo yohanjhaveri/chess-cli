@@ -1,6 +1,6 @@
 import { PIECE_NAMES } from "./constants";
 
-const getMove = (inputString: String) => {
+export const getMove = (inputString: String) => {
   const inputWords = inputString
     .toLowerCase()
     .replace(/[^a-zA-Z ]/g, "")
