@@ -9,20 +9,20 @@ export class Pawn extends Piece {
 
   getAllMoves([x, y]: Coordinate) {
     return {
-      W: [[x, y + 1]],
-      B: [[x, y - 1]],
+      W: [[x + 1, y]],
+      B: [[x - 1, y]],
     }[this.color] as Coordinate[];
   }
 
   getAllAttacks([x, y]: Coordinate) {
     return {
       W: [
-        [x - 1, y + 1],
+        [x + 1, y - 1],
         [x + 1, y + 1],
       ],
       B: [
         [x - 1, y - 1],
-        [x + 1, y - 1],
+        [x - 1, y + 1],
       ],
     }[this.color] as Coordinate[];
   }
