@@ -104,8 +104,3 @@ export class Board {
     }
   }
 }
-
-const board = new Board();
-board.printBoard("W");
-console.log("------------------");
-board.printBoard("B");
