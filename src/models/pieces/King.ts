@@ -1,10 +1,10 @@
 import { PIECES } from "../../constants";
 import { Piece } from "./Piece";
-import { Coordinate, PieceColor, PieceDisplay } from "../../types";
+import { Coordinate, PieceColor } from "../../types";
 
 export class King extends Piece {
   constructor(color: PieceColor) {
-    super(color, -1, PIECES.K);
+    super("K", color, -1, PIECES.K);
   }
 
   getAllMoves(position: Coordinate): Coordinate[] {
