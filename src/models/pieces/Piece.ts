@@ -1,6 +1,13 @@
-import { Coordinate, PieceColor, PieceDisplay, PiecePoints } from "../../types";
+import {
+  Coordinate,
+  PieceName,
+  PieceColor,
+  PiecePoints,
+  PieceDisplay,
+} from "../../types";
 
 export abstract class Piece {
+  public readonly name: PieceName;
   public readonly color: PieceColor;
   public readonly points: PiecePoints;
   public readonly display: PieceDisplay;
@@ -10,7 +17,13 @@ export abstract class Piece {
   public validMoves: Coordinate[];
   public validAttacks: Coordinate[];
 
-  constructor(color: PieceColor, points: PiecePoints, display: PieceDisplay) {
+  constructor(
+    name: PieceName,
+    color: PieceColor,
+    points: PiecePoints,
+    display: PieceDisplay
+  ) {
+    this.name = name;
     this.alive = true;
     this.color = color;
     this.points = points;
