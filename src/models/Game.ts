@@ -1,5 +1,5 @@
-import { PieceColor } from "../types";
-import { generateIterator } from "../utils";
+import { Coordinate, PieceColor } from "../types";
+import { generateIterator, range } from "../utils";
 
 import { Piece } from "./pieces/Piece";
 import { Bishop } from "./pieces/Bishop";
@@ -82,5 +82,53 @@ class Game {
       new Knight(color),
       new Rook(color),
     ];
+  }
+
+  private isValidMove = (piece: Piece, destination: Coordinate) => {
+    const [x2, y2] = destination;
+
+    if (!piece.validMoves.includes(destination)) {
+      return false;
+    }
+
+    const pieceAtDestination = this.board.getCoordinate(x2, y2);
+
+    if (pieceAtDestination.color === piece.color) {
+      return false;
+    }
+
+    if (["Q", "R", "B"].includes(piece.name)) {
+      const squaresBetween = this.getSquaresBetween(
+        piece.position,
+        destination
+      );
+
+      if (squaresBetween.find(([x, y]) => this.board.getCoordinate(x, y))) {
+        return false;
+      }
+    }
+  };
+
+  public getSquaresBetween(origin: Coordinate, destination: Coordinate) {
+    const [x1, y1] = origin;
+    const [x2, y2] = destination;
+
+    // Horizontal
+    if (x1 === x2) {
+      return range(y1 + 1, y2).map((y) => [x1, y]);
+    }
+
+    // Vertical
+    if (y1 === y2) {
+      return range(x1 + 1, x2).map((x) => [x, y1]);
+    }
+
+    // Diagonal
+    if (x1 - x2 === y1 - y2) {
+      return range(1, Math.abs(x1 - x2)).map((i) => [
+        x1 + i * (x1 < x2 ? 1 : -1),
+        y1 + i * (y1 < y2 ? 1 : -1),
+      ]);
+    }
   }
 }

@@ -4,7 +4,11 @@ import { Coordinate, PieceColor } from "../../types";
 
 export class Queen extends Piece {
   constructor(color: PieceColor) {
-    super("Q", color, 9, PIECES.Q);
+    const name = "Q";
+    const points = 9;
+    const display = PIECES[name];
+
+    super(name, color, points, display);
   }
 
   getAllMoves(position: Coordinate): Coordinate[] {

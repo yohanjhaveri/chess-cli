@@ -4,7 +4,11 @@ import { Coordinate, PieceColor } from "../../types";
 
 export class Pawn extends Piece {
   constructor(color: PieceColor) {
-    super("P", color, 1, PIECES.P);
+    const name = "P";
+    const points = 1;
+    const display = PIECES[name];
+
+    super(name, color, points, display);
   }
 
   getAllMoves([x, y]: Coordinate) {

@@ -1,3 +1,4 @@
+import { ROWS, COLS } from "../../constants";
 import {
   Coordinate,
   PieceName,
@@ -35,8 +36,8 @@ export abstract class Piece {
 
   private filterValidSquares(squares: Coordinate[]) {
     return squares.filter(([x, y]) => {
-      if (x < 0 || x > 7) return false;
-      if (y < 0 || y > 7) return false;
+      if (x < 0 || x > ROWS.length) return false;
+      if (y < 0 || y > COLS.length) return false;
 
       return true;
     });
