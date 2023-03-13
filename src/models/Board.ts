@@ -21,6 +21,10 @@ export class Board {
     }
   }
 
+  public getCoordinate(x: number, y: number) {
+    return this.state[x][y];
+  }
+
   private printWhite() {
     for (let x = ROWS.length - 1; x >= 0; x--) {
       let row = ROWS[x] + " ";
@@ -52,9 +56,13 @@ export class Board {
   private printSquare(square: Square) {
     if (square === null) {
       return "⋅ ";
-    } else if (square.color === "W") {
+    }
+
+    if (square.color === "W") {
       return chalk.white(square.display + " ");
-    } else if (square.color === "B") {
+    }
+
+    if (square.color === "B") {
       return chalk.red(square.display + " ");
     }
   }

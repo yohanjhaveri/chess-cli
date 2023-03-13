@@ -4,7 +4,11 @@ import { Coordinate, PieceColor } from "../../types";
 
 export class Rook extends Piece {
   constructor(color: PieceColor) {
-    super("R", color, 5, PIECES.R);
+    const name = "R";
+    const points = 5;
+    const display = PIECES[name];
+
+    super(name, color, points, display);
   }
 
   getAllMoves(position: Coordinate): Coordinate[] {
