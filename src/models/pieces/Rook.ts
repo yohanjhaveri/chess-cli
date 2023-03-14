@@ -3,12 +3,12 @@ import { Piece } from "./Piece";
 import { Coordinate, PieceColor } from "../../types";
 
 export class Rook extends Piece {
-  constructor(color: PieceColor) {
+  constructor(color: PieceColor, position: Coordinate) {
     const name = "R";
     const points = 5;
     const display = PIECES[name];
 
-    super(name, color, points, display);
+    super(name, color, points, display, position);
   }
 
   getAllMoves(position: Coordinate): Coordinate[] {

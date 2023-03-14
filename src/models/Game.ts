@@ -22,12 +22,19 @@ class Game {
   }
 
   private getInitialState() {
+    const BLACK_ROW_PAWN_VALUE = 7;
+    const WHITE_ROW_PAWN_VALUE = 2;
+
     const rowIterator = generateIterator(8);
 
     const emptyRow = rowIterator.map(() => null);
 
-    const blackRowPawn = rowIterator.map(() => new Pawn("B"));
-    const whiteRowPawn = rowIterator.map(() => new Pawn("W"));
+    const blackRowPawn = rowIterator.map(
+      (value) => new Pawn("B", [BLACK_ROW_PAWN_VALUE, value])
+    );
+    const whiteRowPawn = rowIterator.map(
+      (value) => new Pawn("W", [WHITE_ROW_PAWN_VALUE, value])
+    );
 
     const blackRowMain = this.generateMainRow("B");
     const whiteRowMain = this.generateMainRow("W");
@@ -72,15 +79,17 @@ class Game {
   }
 
   private generateMainRow(color: PieceColor): Piece[] {
+    const row = color === "W" ? 0 : 7;
+
     return [
-      new Rook(color),
-      new Knight(color),
-      new Bishop(color),
-      new Queen(color),
-      new King(color),
-      new Bishop(color),
-      new Knight(color),
-      new Rook(color),
+      new Rook(color, [row, 0]),
+      new Knight(color, [row, 1]),
+      new Bishop(color, [row, 2]),
+      new Queen(color, [row, 3]),
+      new King(color, [row, 4]),
+      new Bishop(color, [row, 5]),
+      new Knight(color, [row, 6]),
+      new Rook(color, [row, 7]),
     ];
   }
 

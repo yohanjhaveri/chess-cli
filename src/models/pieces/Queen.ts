@@ -3,12 +3,12 @@ import { Piece } from "./Piece";
 import { Coordinate, PieceColor } from "../../types";
 
 export class Queen extends Piece {
-  constructor(color: PieceColor) {
+  constructor(color: PieceColor, position: Coordinate) {
     const name = "Q";
     const points = 9;
     const display = PIECES[name];
 
-    super(name, color, points, display);
+    super(name, color, points, display, position);
   }
 
   getAllMoves(position: Coordinate): Coordinate[] {
