@@ -22,19 +22,12 @@ class Game {
   }
 
   private getInitialState() {
-    const BLACK_ROW_PAWN_VALUE = 7;
-    const WHITE_ROW_PAWN_VALUE = 2;
-
     const rowIterator = generateIterator(8);
 
     const emptyRow = rowIterator.map(() => null);
 
-    const blackRowPawn = rowIterator.map(
-      (value) => new Pawn("B", [BLACK_ROW_PAWN_VALUE, value])
-    );
-    const whiteRowPawn = rowIterator.map(
-      (value) => new Pawn("W", [WHITE_ROW_PAWN_VALUE, value])
-    );
+    const blackRowPawn = this.generatePawnRow("B");
+    const whiteRowPawn = this.generatePawnRow("W");
 
     const blackRowMain = this.generateMainRow("B");
     const whiteRowMain = this.generateMainRow("W");
@@ -48,10 +41,10 @@ class Game {
     const board = [
       whiteRowMain,
       whiteRowPawn,
-      emptyRow,
-      emptyRow,
-      emptyRow,
-      emptyRow,
+      [...emptyRow],
+      [...emptyRow],
+      [...emptyRow],
+      [...emptyRow],
       blackRowPawn,
       blackRowMain,
     ];
@@ -91,6 +84,13 @@ class Game {
       new Knight(color, [row, 6]),
       new Rook(color, [row, 7]),
     ];
+  }
+
+  private generatePawnRow(color: PieceColor): Piece[] {
+    const row = color === "W" ? 1 : 6;
+    const rowIterator = generateIterator(8);
+
+    return rowIterator.map((value) => new Pawn(color, [row, value]));
   }
 
   private isValidMove = (piece: Piece, destination: Coordinate) => {
