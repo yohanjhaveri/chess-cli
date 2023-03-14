@@ -3,12 +3,12 @@ import { Piece } from "./Piece";
 import { Coordinate, PieceColor } from "../../types";
 
 export class Pawn extends Piece {
-  constructor(color: PieceColor) {
+  constructor(color: PieceColor, position: Coordinate) {
     const name = "P";
     const points = 1;
     const display = PIECES[name];
 
-    super(name, color, points, display);
+    super(name, color, points, display, position);
   }
 
   getAllMoves([x, y]: Coordinate) {

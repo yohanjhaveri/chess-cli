@@ -26,8 +26,8 @@ class Game {
 
     const emptyRow = rowIterator.map(() => null);
 
-    const blackRowPawn = rowIterator.map(() => new Pawn("B"));
-    const whiteRowPawn = rowIterator.map(() => new Pawn("W"));
+    const blackRowPawn = this.generatePawnRow("B");
+    const whiteRowPawn = this.generatePawnRow("W");
 
     const blackRowMain = this.generateMainRow("B");
     const whiteRowMain = this.generateMainRow("W");
@@ -41,10 +41,10 @@ class Game {
     const board = [
       whiteRowMain,
       whiteRowPawn,
-      emptyRow,
-      emptyRow,
-      emptyRow,
-      emptyRow,
+      [...emptyRow],
+      [...emptyRow],
+      [...emptyRow],
+      [...emptyRow],
       blackRowPawn,
       blackRowMain,
     ];
@@ -72,16 +72,25 @@ class Game {
   }
 
   private generateMainRow(color: PieceColor): Piece[] {
+    const row = color === "W" ? 0 : 7;
+
     return [
-      new Rook(color),
-      new Knight(color),
-      new Bishop(color),
-      new Queen(color),
-      new King(color),
-      new Bishop(color),
-      new Knight(color),
-      new Rook(color),
+      new Rook(color, [row, 0]),
+      new Knight(color, [row, 1]),
+      new Bishop(color, [row, 2]),
+      new Queen(color, [row, 3]),
+      new King(color, [row, 4]),
+      new Bishop(color, [row, 5]),
+      new Knight(color, [row, 6]),
+      new Rook(color, [row, 7]),
     ];
+  }
+
+  private generatePawnRow(color: PieceColor): Piece[] {
+    const row = color === "W" ? 1 : 6;
+    const rowIterator = generateIterator(8);
+
+    return rowIterator.map((value) => new Pawn(color, [row, value]));
   }
 
   private isValidMove = (piece: Piece, destination: Coordinate) => {

@@ -14,6 +14,7 @@ export abstract class Piece {
   public readonly display: PieceDisplay;
 
   public alive: boolean;
+  public hasMoved: boolean;
   public position: Coordinate;
   public validMoves: Coordinate[];
   public validAttacks: Coordinate[];
@@ -22,13 +23,16 @@ export abstract class Piece {
     name: PieceName,
     color: PieceColor,
     points: PiecePoints,
-    display: PieceDisplay
+    display: PieceDisplay,
+    position: Coordinate
   ) {
     this.name = name;
     this.alive = true;
+    this.hasMoved = false;
     this.color = color;
     this.points = points;
     this.display = display;
+    this.position = position;
   }
 
   abstract getAllMoves(position: Coordinate): Coordinate[];
@@ -55,6 +59,7 @@ export abstract class Piece {
 
   public move(position: Coordinate) {
     this.position = position;
+    this.hasMoved = true;
     this.validMoves = this.getValidMoves();
     this.validAttacks = this.getValidAttacks();
   }
